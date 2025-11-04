@@ -12,10 +12,11 @@ jobs:
   stale:
     runs-on: ubuntu-latest
     steps:
-    - name: Harden the runner (Audit all outbound calls)
+    - name: Harden the runner
       uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a # v2.13.1
       with:
-        egress-policy: audit
+        egress-policy: block
+        policy: global-allowed-endpoints-policy
 
     - uses: actions/stale@28ca1036281a5e5922ead5184a1bbf96e5fc984e # v9.0.0
       name: Clean up stale PRs and Issues
