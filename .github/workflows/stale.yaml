@@ -11,7 +11,16 @@ on:
 jobs:
   stale:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+
     steps:
+    - name: Harden the runner
+      uses: step-security/harden-runner@95d9a5deda9de15063e7595e9719c11c38c90ae2 # v2.13.2
+      with:
+        egress-policy: block
+        policy: global-allowed-endpoints-policy
+
     - uses: actions/stale@28ca1036281a5e5922ead5184a1bbf96e5fc984e # v9.0.0
       name: Clean up stale PRs and Issues
       with:
